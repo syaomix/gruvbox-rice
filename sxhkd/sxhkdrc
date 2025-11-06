@@ -38,7 +38,7 @@ super + {t,shift + t,s,f}
 	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
 
 # set the node flags
-super + ctrl + {m,x,y,z}
+super + ctrl + {m,l,c,v}
 	bspc node -g {marked,locked,sticky,private}
 
 #
@@ -103,13 +103,16 @@ super + ctrl + shift + space
 
 # swap the current node and the biggest window
 super + g
-	bspc node -s biggest.window
+	bspc node -s biggest.window.local
+
+super + shift + g
+	bspc node -n biggest.window.local
 
 # expand a window by moving one of its side outward
-super + alt + {h,j,k,l}
-  STEP=20; SELECTION={1,2,3,4}; \
-  bspc node -z $(echo "left -$STEP 0,bottom 0 $STEP,top 0 -$STEP,right $STEP 0" | cut -d',' -f$SELECTION) || \
-  bspc node -z $(echo "right -$STEP 0,top 0 $STEP,bottom 0 -$STEP,left $STEP 0" | cut -d',' -f$SELECTION)
+#super + alt + {h,j,k,l}
+#  STEP=20; SELECTION={1,2,3,4}; \
+#  bspc node -z $(echo "left -$STEP 0,bottom 0 $STEP,top 0 -$STEP,right $STEP 0" | cut -d',' -f$SELECTION) || \
+#  bspc node -z $(echo "right -$STEP 0,top 0 $STEP,bottom 0 -$STEP,left $STEP 0" | cut -d',' -f$SELECTION)
 
 
 # contract a window by moving one of its side inward
