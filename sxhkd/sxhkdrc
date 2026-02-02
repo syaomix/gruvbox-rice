@@ -140,8 +140,7 @@ XF86AudioMute
 
 # screenshot
 super + shift + s
-	flameshot gui
-
+	flameshot gui 
 # firefox
 ctrl + alt + f
 	firefox

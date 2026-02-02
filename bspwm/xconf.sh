@@ -1,9 +1,13 @@
-#! /bin/sh
+#! /bin/bash
 
-xrandr --output eDP-1 --set TearFree on &
-xrandr --output HDMI-1 --primary &
-xrandr --output HDMI-1 --set TearFree on &
-xrandr --output HDMI-1 --left-of eDP-1 &
+
+INTERNALMONITOR=eDP
+EXTERNALMONITOR=HDMI-A-0
+
+xrandr --output "$INTERNALMONITOR" --set TearFree on &
+xrandr --output "$EXTERNALMONITOR" --primary &
+xrandr --output "$EXTERNALMONITOR" --set TearFree on &
+xrandr --output "$EXTERNALMONITOR" --left-of "$INTERNALMONITOR" &
 
 xinput --set-prop 10 'libinput Accel Speed' 0 &
 xinput --set-prop 8 'libinput Accel Speed' -0.7 &
@@ -11,9 +15,10 @@ xinput --set-prop 8 'libinput Accel Speed' -0.7 &
 setxkbmap -option grp:alt_shift_toggle us,ru &
 
 
-if [[ $(xrandr -q | grep 'HDMI-1 connected') ]]; then
-    bspc monitor eDP-1 -d 5 6 7 8 
-    bspc monitor HDMI-1 -d 1 2 3 4
+if xrandr -q | grep -q "${EXTERNALMONITOR} connected"; then
+    bspc monitor "$INTERNALMONITOR" -d 5 6 7 8 
+    bspc monitor "$EXTERNALMONITOR" -d 1 2 3 4
+    bspc wm -O "$EXTERNAL_MONITOR" "$INTERNAL_MONITOR"
 else
-    bspc monitor eDP-1 -d 1 2 3 4 
+    bspc monitor "$INTERNALMONITOR" -d 1 2 3 4 
 fi
