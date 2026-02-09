@@ -1,18 +1,18 @@
-#! /bin/sh
+#! /bin/bash
 
 
 EXTERNALMONITOR=HDMI-A-0
 INTERNALMONITOR=eDP
 
-sxhkd &
-picom & 
-dunst &
-flameshot &
+.config/bspwm/xconf.sh &
 snixembed --fork &
-sh .config/bspwm/polybar.sh &
-sh .config/bspwm/xconf.sh &
+dunst &
+picom &
+flameshot &
 nitrogen --restore &
+sxhkd &
 bspc monitor "${EXTERNALMONITOR}" -s "${INTERNALMONITOR}" &
+.config/bspwm/polybar.sh &
 
 bspc config wm_name LG3D
 bspc config split_ratio          0.5
